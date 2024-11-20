@@ -2,22 +2,31 @@
 using LlibreriaSergi;
 namespace ActivitatsT2
 {
-    //Precon: L'usuari introdueix una quantitat entera de minuts
-    //Postcon: L'usuari rep la seva conversió a segons
+    //Precon: L'usuari introdueix dos numeros
+    //Postcon: L'usuari quin dels dos es més gran i quin es més petit
     public class Activitats
     {
         public static void Main()
         {
-            const string Msg1 = "Write a number of minutes, use a integer";
-            const string Msg2 = "The conversion to seconds is: {0}";
+            const string Msg1 = "Write two numbers and i will tell you what number is bigger.";
+            const string Msg2 = "The first number is bigger than the second.";
+            const string Msg3 = "The second number is bigger than the first.";
+            const string Msg4 = "The numbers are the same";
             const string Error = "The format of the  umber is incorrect";
-            int time;
+            int firstNum, secondNum;
             Console.WriteLine(Msg1);
             try
             {
-                time = int.Parse(Console.ReadLine());
-                time = Utils.MinToSec(time);
-                Console.WriteLine(Msg2, time);
+                firstNum = int.Parse(Console.ReadLine());
+                secondNum = int.Parse(Console.ReadLine());
+                if (firstNum == secondNum)
+                {
+                    Console.WriteLine(Msg4);
+                }
+                else
+                {
+                    Console.WriteLine(Utils.BiggerThan(firstNum, secondNum) ? Msg2 : Msg3);
+                }
             }
             catch (FormatException)
             {
