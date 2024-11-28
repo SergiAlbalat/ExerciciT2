@@ -8,57 +8,34 @@ namespace ActivitatsT2
     {
         public static void Main()
         {
-            const string Msg1 = "How many temperatures do you want to store?(Cº)";
-            const string Msg2 = "Write a temperature:";
-            const string Msg3 = "What do you want to do?\n1- Order temperatures and write.\n2- Search if there is a specific temperature stored\n3- Make an histogram with the values.\n4- Exit";
-            const string Msg4 = "What temperature do you want to know if it's stored?";
-            const string Msg5 = "It's stored!";
-            const string Msg6 = "It's not stored";
+            const string Msg1 = "What method do you want to use?\n1- Iterative\t2- Recursive";
+            const string Msg2 = "Write 2 numbers and i will show their product:";
+            const string Msg3 = "That's not a method";
+            const string Msg4 = "The answer is: {0}";
             const string Error = "The format of the  umber is incorrect";
-            const int MinOption = 1;
-            const int MaxOption = 4;
-            int quantity, option;
-            bool exit = false;
+            int method, firstNum, secondNum, result;
+            Console.WriteLine(Msg1);
             try
             {
                 do
                 {
-                    Console.WriteLine(Msg1);
-                    quantity = int.Parse(Console.ReadLine());
-                }while(Utils.IsNotNatural(quantity));
-                double[] temperatures = new double[quantity];
-                for(int i = 0; i < temperatures.Length; i++)
+                    method = int.Parse(Console.ReadLine());
+                    Console.WriteLine(!Utils.InRange(method, 0, 3) ? Msg3 : "");
+                } while (!Utils.InRange(method, 0, 3));
+                Console.WriteLine(Msg2);
+                firstNum = int.Parse(Console.ReadLine());
+                secondNum = int.Parse(Console.ReadLine());
+                switch (method)
                 {
-                    Console.WriteLine(Msg2);
-                    temperatures[i] = double.Parse(Console.ReadLine());
+                    case 1:
+                        result = Utils.MultiplyRussia(firstNum, secondNum);
+                        Console.WriteLine(Msg4, result);
+                        break;
+                    case 2:
+                        result = Utils.MultiplyRussiaRecursive(firstNum, secondNum);
+                        Console.WriteLine(Msg4, result);
+                        break;
                 }
-                do
-                {
-                    do
-                    {
-                        Console.WriteLine(Msg3);
-                        option = int.Parse(Console.ReadLine());
-                        switch (option)
-                        {
-                            case 1:
-                                temperatures = Utils.OrdenarArray(temperatures);
-                                Utils.EscribirArrays(temperatures);
-                                break;
-                            case 2:
-                                double filter;
-                                Console.WriteLine(Msg4);
-                                filter = double.Parse(Console.ReadLine());
-                                Console.WriteLine(Utils.BuscarEnArray(temperatures, filter) ? Msg5 : Msg6);
-                                break;
-                            case 3:
-                                Utils.ArrayHistograma(temperatures);
-                                break;
-                            case 4:
-                                exit = true;
-                                break;
-                        }
-                    } while (Utils.InRange(option, MinOption, MaxOption));
-                }while(!exit);
             }
             catch (FormatException)
             {
