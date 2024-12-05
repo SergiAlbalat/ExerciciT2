@@ -2,17 +2,18 @@
 using LlibreriaSergi;
 namespace ActivitatsT2
 {
-    //Precon: L'usuari introdueix cuantes temperatures introduira
-    //Postcon: L'usuari les temperatures de manera ordenada i en format d'histograma
+    //Precon: L'usuri introdueix un numero
+    //Postcon: L'usuari sap si el numero es primer
     public class Activitats
     {
         public static void Main()
         {
-            const string Msg1 = "Write a natural number and i wil transform it to binari.";
-            const string Msg2 = "Your number is: {0}";
+            const string Msg1 = "Write a natural number and i will tell you if it's a prime number.";
+            const string Msg2 = "It is";
+            const string Msg3 = "It's not";
             const string Error = "The format of the  umber is incorrect";
+            const int Divisor = 2;
             int num;
-            double result;
             Console.WriteLine(Msg1);
             try
             {
@@ -20,8 +21,7 @@ namespace ActivitatsT2
                 {
                     num = int.Parse(Console.ReadLine());
                 } while (Utils.IsNotNatural(num));
-                result = Utils.BinaryConvertRecursive(num);
-                Console.WriteLine(Msg2, result);
+                Console.WriteLine(Utils.IsPrimaryRecursive(num, Divisor) ? Msg2 : Msg3);
             }
             catch (FormatException)
             {
